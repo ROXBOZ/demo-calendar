@@ -10,44 +10,46 @@ function Course({
   idx: number;
   getLevelLabel: (level?: number) => string;
 }) {
-  const baseHeight = 8;
+  const baseHeight = 9;
   const heightRem = (course.duration / 60) * baseHeight;
   return (
     <div
       key={idx}
-      className="border-t pt-1"
+      className="bg-stone-50 border-2 min-h-fit border-amber-200 py-4 rounded-xl"
       style={{ height: `${heightRem}rem` }}
     >
-      <div className="flex justify-between text-lg  items-baseline w-full pb-2">
+      <div className="flex bg-amber-200 pt-2 leading-tight px-4 justify-between text-lg font-medium items-baseline w-full pb-2">
         <h3>
           {course.title} &#40;{course.duration}min.&#41;
         </h3>
         <p>{course.startTime}</p>
       </div>
-      <div className="flex gap-1">
-        {course.level && (
-          <p>
-            {getLevelLabel(course.level)} <span>level</span>
-            {course.trainers && ","}
-          </p>
+      <div className="px-4 py-4">
+        <div className="flex gap-1">
+          {course.level && (
+            <p>
+              {getLevelLabel(course.level)} <span>level</span>
+              {course.trainers && ","}
+            </p>
+          )}
+          {course.trainers && (
+            <div>
+              {course.level ? "with " : "With "}
+              {course.trainers?.map((trainer, index) => (
+                <span key={index}>
+                  {index > 0 && " / "}
+                  {trainer}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+        {course.minAge && course.minAge < 18 && (
+          <p>For girls from {course.minAge} years old</p>
         )}
-        {course.trainers && (
-          <div>
-            {course.level ? "with " : "With "}
-            {course.trainers?.map((trainer, index) => (
-              <span key={index}>
-                {index > 0 && " / "}
-                {trainer}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-      {course.minAge && course.minAge < 18 && (
-        <p>For girls from {course.minAge} years old</p>
-      )}
 
-      {course.openToAll && <p>Open for trial</p>}
+        {course.openToAll && <p>Open for trial</p>}
+      </div>
     </div>
   );
 }

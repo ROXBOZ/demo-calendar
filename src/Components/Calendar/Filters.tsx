@@ -16,94 +16,98 @@ export const Filters: React.FC<FiltersProps> = ({
   resetFilters,
 }) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-6 gap-4 items-end">
-      <div>
-        <label>Title</label>
-        <select
-          className="w-full p-2 border"
-          value={titleFilter}
-          onChange={(e) => {
-            setTitleFilter(e.target.value);
-            resetFilters("title");
-          }}
-        >
-          <option value="">All</option>
-          {titles.map((title) => (
-            <option key={title} value={title}>
-              {title}
-            </option>
-          ))}
-        </select>
+    <div className="flex gap-4 justify-between items-baseline bg-amber-100 p-4 rounded-lg">
+      <div className="flex gap-4">
+        <div className="flex gap-3 items-baseline">
+          <label className="font-semibold">Title</label>
+          <select
+            className="hover:cursor-pointer"
+            value={titleFilter}
+            onChange={(e) => {
+              setTitleFilter(e.target.value);
+              resetFilters("title");
+            }}
+          >
+            <option>All</option>
+            {titles.map((title) => (
+              <option key={title} value={title}>
+                {title}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex gap-3 items-baseline">
+          <label className="font-semibold">Level</label>
+          <select
+            className="hover:cursor-pointer"
+            value={levelFilter}
+            onChange={(e) => {
+              setLevelFilter(e.target.value);
+              resetFilters("level");
+            }}
+          >
+            <option value="">All</option>
+            <option value="1">Beginner</option>
+            <option value="2">Intermediate</option>
+            <option value="3">Advanced</option>
+          </select>
+        </div>
+
+        <div className="flex gap-3 items-baseline">
+          <label className="font-semibold">Trainer</label>
+          <select
+            className="hover:cursor-pointer"
+            value={trainerFilter}
+            onChange={(e) => {
+              setTrainerFilter(e.target.value);
+              resetFilters("trainer");
+            }}
+          >
+            <option value="">All</option>
+            {trainers.map((trainer) => (
+              <option key={trainer} value={trainer}>
+                {trainer}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex gap-3 items-baseline">
+          <label className="font-semibold">Age Group</label>
+          <select
+            className="hover:cursor-pointer"
+            value={ageGroup}
+            onChange={(e) => {
+              setAgeGroup(e.target.value as "youngs" | "adults" | "");
+              resetFilters("ageGroup");
+            }}
+          >
+            <option value="">All</option>
+            <option value="youngs">Youngs</option>
+            <option value="adults">Adults</option>
+          </select>
+        </div>
+
+        <div className="flex gap-3 items-baseline">
+          <input
+            type="checkbox"
+            id="openToAll"
+            checked={openToAllOnly}
+            onChange={() => {
+              setOpenToAllOnly((prev) => !prev);
+              resetFilters("openToAll");
+            }}
+            className="size-4 hover:cursor-pointer"
+          />
+          <label className="font-semibold" htmlFor="openToAll">
+            Open to All
+          </label>
+        </div>
       </div>
 
-      <div>
-        <label>Level</label>
-        <select
-          className="w-full p-2 border"
-          value={levelFilter}
-          onChange={(e) => {
-            setLevelFilter(e.target.value);
-            resetFilters("level");
-          }}
-        >
-          <option value="">All</option>
-          <option value="1">Beginner</option>
-          <option value="2">Intermediate</option>
-          <option value="3">Advanced</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Trainer</label>
-        <select
-          className="w-full p-2 border"
-          value={trainerFilter}
-          onChange={(e) => {
-            setTrainerFilter(e.target.value);
-            resetFilters("trainer");
-          }}
-        >
-          <option value="">All</option>
-          {trainers.map((trainer) => (
-            <option key={trainer} value={trainer}>
-              {trainer}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label>Age Group</label>
-        <select
-          className="w-full p-2 border"
-          value={ageGroup}
-          onChange={(e) => {
-            setAgeGroup(e.target.value as "youngs" | "adults" | "");
-            resetFilters("ageGroup");
-          }}
-        >
-          <option value="">All</option>
-          <option value="youngs">Youngs</option>
-          <option value="adults">Adults</option>
-        </select>
-      </div>
-
-      <div className="flex items-center gap-2 mt-6">
-        <input
-          type="checkbox"
-          id="openToAll"
-          checked={openToAllOnly}
-          onChange={() => {
-            setOpenToAllOnly((prev) => !prev);
-            resetFilters("openToAll");
-          }}
-          className="size-4"
-        />
-        <label htmlFor="openToAll">Open to All</label>
-      </div>
-
-      {/* Reset button */}
       <button
+        className="bg-amber-300 ring-inset hover:ring-2 hover:ring-amber-400 active:bg-amber-400 hover:delay-200 hover:duration-200 px-6 py-3 rounded-lg font-semibold hover:cursor-pointer"
         onClick={() => {
           setLevelFilter("");
           setTitleFilter("");

@@ -121,57 +121,54 @@ const Home: React.FC = () => {
   }, [rooms, filteredCourses]);
 
   return (
-    <div>
-      <main className="p-4 flex flex-col gap-4">
-        <Filters
-          levelFilter={levelFilter}
-          setLevelFilter={setLevelFilter}
-          titleFilter={titleFilter}
-          setTitleFilter={setTitleFilter}
-          trainerFilter={trainerFilter}
-          setTrainerFilter={setTrainerFilter}
-          ageGroup={ageGroup}
-          setAgeGroup={setAgeGroup}
-          openToAllOnly={openToAllOnly}
-          setOpenToAllOnly={setOpenToAllOnly}
-          titles={titles}
-          trainers={trainers}
-          resetFilters={resetFilters}
-        />
+    <main className="bg-stone-300 min-h-screen p-4 flex flex-col gap-4">
+      <Filters
+        levelFilter={levelFilter}
+        setLevelFilter={setLevelFilter}
+        titleFilter={titleFilter}
+        setTitleFilter={setTitleFilter}
+        trainerFilter={trainerFilter}
+        setTrainerFilter={setTrainerFilter}
+        ageGroup={ageGroup}
+        setAgeGroup={setAgeGroup}
+        openToAllOnly={openToAllOnly}
+        setOpenToAllOnly={setOpenToAllOnly}
+        titles={titles}
+        trainers={trainers}
+        resetFilters={resetFilters}
+      />
 
-        <div className="flex flex-col gap-4">
-          {rooms.map((room) => (
-            <div key={room} className="bg-blue-100 flex flex-col gap-2">
-              <h1 className="text-xl font-medium pt-4 px-4">
-                {room === 1 ? "Workout Room" : "Boxing Room"}
-              </h1>
-              <p></p>
-              <div className="grid grid-cols-1 md:grid-cols-5 divide-x">
-                {weekDays.map((day, index) => (
-                  <div key={index} className="p-4 flex flex-col gap-2">
-                    <h2 className="font-medium text-lg">{day}</h2>
-                    {coursesByRoomAndDay[room][index].length > 0 ? (
-                      coursesByRoomAndDay[room][index].map((course, idx) => {
-                        return (
-                          <Course
-                            key={`${room}-${index}-${idx}`}
-                            course={course}
-                            idx={idx}
-                            getLevelLabel={getLevelLabel}
-                          />
-                        );
-                      })
-                    ) : (
-                      <p>No Course</p>
-                    )}
-                  </div>
-                ))}
-              </div>
+      <div className="flex flex-col gap-4">
+        {rooms.map((room) => (
+          <div key={room}>
+            <h1 className="text-xl font-medium p-4">
+              {room === 1 ? "Workout Room" : "Boxing Room"}
+            </h1>
+            <div className="grid bg-stone-100 p-4 rounded-xl gap-4 grid-cols-1 md:grid-cols-5 ">
+              {weekDays.map((day, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                  <h2 className="font-medium px-4">{day}</h2>
+                  {coursesByRoomAndDay[room][index].length > 0 ? (
+                    coursesByRoomAndDay[room][index].map((course, idx) => {
+                      return (
+                        <Course
+                          key={`${room}-${index}-${idx}`}
+                          course={course}
+                          idx={idx}
+                          getLevelLabel={getLevelLabel}
+                        />
+                      );
+                    })
+                  ) : (
+                    <p>No Course</p>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </main>
-    </div>
+          </div>
+        ))}
+      </div>
+    </main>
   );
 };
 
