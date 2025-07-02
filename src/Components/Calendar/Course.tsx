@@ -8,7 +8,6 @@ function Course({
 }: {
   course: Course;
   idx: number;
-
   getLevelLabel: (level?: number) => string;
 }) {
   const baseHeight = 8;
@@ -20,7 +19,9 @@ function Course({
       style={{ height: `${heightRem}rem` }}
     >
       <div className="flex justify-between text-lg  items-baseline w-full pb-2">
-        <h3>{course.title}</h3>
+        <h3>
+          {course.title} &#40;{course.duration}min.&#41;
+        </h3>
         <p>{course.startTime}</p>
       </div>
       <div className="flex gap-1">
