@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 
+import Course from "@/Components/Calendar/Course";
 import { Filters } from "@/Components/Calendar/Filters";
 import rawData from "../data.json";
 
@@ -12,7 +13,6 @@ const Home: React.FC = () => {
   const [trainerFilter, setTrainerFilter] = useState<string>("");
   const [ageGroup, setAgeGroup] = useState<"youngs" | "adults" | "">("");
   const [openToAllOnly, setOpenToAllOnly] = useState<boolean>(false);
-  const baseHeight = 8;
 
   const getLevelLabel = (level?: number) => {
     switch (level) {
@@ -136,54 +136,24 @@ const Home: React.FC = () => {
 
         <div className="flex flex-col gap-4">
           {rooms.map((room) => (
-            <div key={room} className="bg-blue-100 p-4 flex flex-col gap-4">
-              <h1 className="text-xl font-semibold">
+            <div key={room} className="bg-blue-100 flex flex-col gap-2">
+              <h1 className="text-xl font-medium pt-4 px-4">
                 {room === 1 ? "Workout Room" : "Boxing Room"}
               </h1>
               <p></p>
               <div className="grid grid-cols-1 md:grid-cols-5 divide-x">
                 {weekDays.map((day, index) => (
                   <div key={index} className="p-4 flex flex-col gap-2">
-                    <h2 className="font-semibold">{day}</h2>
+                    <h2 className="font-medium text-lg">{day}</h2>
                     {coursesByRoomAndDay[room][index].length > 0 ? (
                       coursesByRoomAndDay[room][index].map((course, idx) => {
-                        const heightRem = (course.duration / 60) * baseHeight;
                         return (
-                          <div
-                            key={idx}
-                            className="border-t pt-1"
-                            style={{ height: `${heightRem}rem` }}
-                          >
-                            <div className="flex justify-between items-baseline w-full pb-2">
-                              <h3 className="text-lg">{course.title}</h3>
-                              <p>{course.startTime}</p>
-                            </div>
-                            <div className="flex gap-1">
-                              {course.level && (
-                                <p>
-                                  {getLevelLabel(course.level)}{" "}
-                                  <span>level</span>
-                                  {course.trainers && ","}
-                                </p>
-                              )}
-                              {course.trainers && (
-                                <div>
-                                  {course.level ? "with " : "With "}
-                                  {course.trainers?.map((trainer, index) => (
-                                    <span key={index}>
-                                      {index > 0 && " / "}
-                                      {trainer}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                            {course.minAge && course.minAge < 18 && (
-                              <p>For girls from {course.minAge} years old</p>
-                            )}
-
-                            {course.openToAll && <p>Open for trial</p>}
-                          </div>
+                          <Course
+                            key={`${room}-${index}-${idx}`}
+                            course={course}
+                            idx={idx}
+                            getLevelLabel={getLevelLabel}
+                          />
                         );
                       })
                     ) : (
