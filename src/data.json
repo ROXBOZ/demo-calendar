@@ -1,0 +1,169 @@
+[
+  {
+    "title": "Kundalini Yoga",
+    "weekDay": 1,
+    "startTime": "08:30",
+    "duration": 60,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Dean"],
+    "minAge": 18
+  },
+  {
+    "title": "Basic Techniques",
+    "weekDay": 2,
+    "level": 1,
+    "startTime": "10:00",
+    "duration": 90,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Kim", "Ruth"],
+    "minAge": 18
+  },
+  {
+    "title": "Basic Techniques",
+    "weekDay": 1,
+    "level": 1,
+    "startTime": "20:30",
+    "duration": 60,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Lindsey"],
+    "minAge": 18
+  },
+  {
+    "title": "Hatha Yoga",
+    "weekDay": 3,
+    "startTime": "10:00",
+    "duration": 90,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Beate"],
+    "minAge": 18
+  },
+  {
+    "title": "Strength",
+    "weekDay": 4,
+    "startTime": "10:00",
+    "duration": 60,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Dean"],
+    "minAge": 18
+  },
+  {
+    "title": "Workout",
+    "weekDay": 5,
+    "startTime": "10:00",
+    "duration": 120,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Kim", "Angela"],
+    "minAge": 18
+  },
+  {
+    "title": "Workout",
+    "weekDay": 1,
+    "startTime": "10:00",
+    "duration": 120,
+    "room": 1,
+    "openToAll": true,
+    "minAge": 18
+  },
+  {
+    "title": "Thai Chi",
+    "weekDay": 1,
+    "startTime": "18:45",
+    "duration": 90,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 18
+  },
+  {
+    "title": "Martial Arts",
+    "weekDay": 1,
+    "startTime": "17:00",
+    "duration": 90,
+    "room": 2,
+    "openToAll": true,
+    "trainers": ["Dean", "Claudia"],
+    "minAge": 18
+  },
+  {
+    "title": "Fighting Techniques",
+    "weekDay": 2,
+    "startTime": "17:30",
+    "duration": 90,
+    "room": 1,
+    "openToAll": true,
+    "trainers": ["Joa"],
+    "minAge": 18
+  },
+  {
+    "title": "Basic Techniques",
+    "weekDay": 2,
+    "startTime": "19:00",
+    "duration": 90,
+    "room": 1,
+    "openToAll": true,
+    "minAge": 18
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 2,
+    "startTime": "16:30",
+    "duration": 60,
+    "minAge": 11,
+    "room": 1,
+    "openToAll": false
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 3,
+    "startTime": "17:00",
+    "duration": 90,
+    "minAge": 13,
+    "room": 1,
+    "openToAll": false
+  },
+  {
+    "title": "Thaiboxing",
+    "weekDay": 3,
+    "startTime": "18:30",
+    "duration": 120,
+    "level": 1,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 18
+  },
+  {
+    "title": "Thaiboxing",
+    "weekDay": 1,
+    "startTime": "18:45",
+    "duration": 120,
+    "level": 3,
+    "room": 2,
+    "openToAll": false,
+    "trainers": ["Kim"],
+    "minAge": 18
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 2,
+    "startTime": "16:30",
+    "duration": 90,
+    "room": 2,
+    "minAge": 11,
+    "openToAll": false
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 4,
+    "startTime": "19:30",
+    "duration": 90,
+    "level": 2,
+    "room": 2,
+    "openToAll": false,
+    "minAge": 18
+  }
+]

@@ -1,115 +1,203 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { useMemo, useState } from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Filters } from "@/Components/Calendar/Filters";
+import rawData from "../data.json";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-export default function Home() {
+const Home: React.FC = () => {
+  const metadata = rawData as Course[];
+  const [levelFilter, setLevelFilter] = useState<string>("");
+  const [titleFilter, setTitleFilter] = useState<string>("");
+  const [trainerFilter, setTrainerFilter] = useState<string>("");
+  const [ageGroup, setAgeGroup] = useState<"youngs" | "adults" | "">("");
+  const [openToAllOnly, setOpenToAllOnly] = useState<boolean>(false);
+  const baseHeight = 8;
+
+  const getLevelLabel = (level?: number) => {
+    switch (level) {
+      case 1:
+        return "Beginner";
+      case 2:
+        return "Intermediate";
+      case 3:
+        return "Advanced";
+      default:
+        return "";
+    }
+  };
+
+  const rooms = useMemo(
+    () => Array.from(new Set(metadata.map((c) => c.room))),
+    [metadata]
+  );
+  const titles = useMemo(
+    () => Array.from(new Set(metadata.map((c) => c.title))),
+    [metadata]
+  );
+  const trainers = useMemo(
+    () => Array.from(new Set(metadata.flatMap((c) => c.trainers ?? []))).sort(),
+    [metadata]
+  );
+
+  const resetFilters = (
+    filterType: "level" | "title" | "trainer" | "ageGroup" | "openToAll"
+  ) => {
+    if (filterType === "level") {
+      setTitleFilter("");
+      setTrainerFilter("");
+      setAgeGroup("");
+      setOpenToAllOnly(false);
+    } else if (filterType === "title") {
+      setLevelFilter("");
+      setTrainerFilter("");
+      setAgeGroup("");
+      setOpenToAllOnly(false);
+    } else if (filterType === "trainer") {
+      setLevelFilter("");
+      setTitleFilter("");
+      setAgeGroup("");
+      setOpenToAllOnly(false);
+    } else if (filterType === "ageGroup") {
+      setLevelFilter("");
+      setTitleFilter("");
+      setTrainerFilter("");
+      setOpenToAllOnly(false);
+    } else if (filterType === "openToAll") {
+      setLevelFilter("");
+      setTitleFilter("");
+      setTrainerFilter("");
+      setAgeGroup("");
+    }
+  };
+
+  const filteredCourses = useMemo(() => {
+    return metadata.filter((course) => {
+      const matchTitle = titleFilter ? course.title === titleFilter : true;
+      const matchLevel = levelFilter
+        ? String(course.level) === levelFilter
+        : true;
+      const matchTrainer = trainerFilter
+        ? course.trainers?.includes(trainerFilter)
+        : true;
+
+      let matchAge = true;
+      if (ageGroup === "youngs") {
+        matchAge = Boolean(course.minAge && course.minAge < 18);
+      } else if (ageGroup === "adults") {
+        matchAge = Boolean(course.minAge && course.minAge >= 18);
+      }
+
+      const matchOpen = openToAllOnly ? course.openToAll : true;
+
+      return matchTitle && matchLevel && matchTrainer && matchAge && matchOpen;
+    });
+  }, [
+    titleFilter,
+    levelFilter,
+    trainerFilter,
+    ageGroup,
+    openToAllOnly,
+    metadata,
+  ]);
+
+  const coursesByRoomAndDay = useMemo(() => {
+    return rooms.reduce((acc, room) => {
+      acc[room] = weekDays.map((_, index) => {
+        const dayIndex = index + 1;
+        return filteredCourses
+          .filter(
+            (course) => course.room === room && course.weekDay === dayIndex
+          )
+          .sort((a, b) => (a.startTime ?? "").localeCompare(b.startTime ?? ""));
+      });
+      return acc;
+    }, {} as Record<number, Course[][]>);
+  }, [rooms, filteredCourses]);
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div>
+      <main className="p-4 flex flex-col gap-4">
+        <Filters
+          levelFilter={levelFilter}
+          setLevelFilter={setLevelFilter}
+          titleFilter={titleFilter}
+          setTitleFilter={setTitleFilter}
+          trainerFilter={trainerFilter}
+          setTrainerFilter={setTrainerFilter}
+          ageGroup={ageGroup}
+          setAgeGroup={setAgeGroup}
+          openToAllOnly={openToAllOnly}
+          setOpenToAllOnly={setOpenToAllOnly}
+          titles={titles}
+          trainers={trainers}
+          resetFilters={resetFilters}
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+        <div className="flex flex-col gap-4">
+          {rooms.map((room) => (
+            <div key={room} className="bg-blue-100 p-4 flex flex-col gap-4">
+              <h1 className="text-xl font-semibold">
+                {room === 1 ? "Workout Room" : "Boxing Room"}
+              </h1>
+              <p></p>
+              <div className="grid grid-cols-1 md:grid-cols-5 divide-x">
+                {weekDays.map((day, index) => (
+                  <div key={index} className="p-4 flex flex-col gap-2">
+                    <h2 className="font-semibold">{day}</h2>
+                    {coursesByRoomAndDay[room][index].length > 0 ? (
+                      coursesByRoomAndDay[room][index].map((course, idx) => {
+                        const heightRem = (course.duration / 60) * baseHeight;
+                        return (
+                          <div
+                            key={idx}
+                            className="border-t pt-1"
+                            style={{ height: `${heightRem}rem` }}
+                          >
+                            <div className="flex justify-between items-baseline w-full pb-2">
+                              <h3 className="text-lg">{course.title}</h3>
+                              <p>{course.startTime}</p>
+                            </div>
+                            <div className="flex gap-1">
+                              {course.level && (
+                                <p>
+                                  {getLevelLabel(course.level)}{" "}
+                                  <span>level</span>
+                                  {course.trainers && ","}
+                                </p>
+                              )}
+                              {course.trainers && (
+                                <div>
+                                  {course.level ? "with " : "With "}
+                                  {course.trainers?.map((trainer, index) => (
+                                    <span key={index}>
+                                      {index > 0 && " / "}
+                                      {trainer}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                            {course.minAge && course.minAge < 18 && (
+                              <p>For girls from {course.minAge} years old</p>
+                            )}
+
+                            {course.openToAll && <p>Open for trial</p>}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p>No Course</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
-}
+};
+
+export default Home;
