@@ -121,7 +121,7 @@ const Home: React.FC = () => {
   }, [rooms, filteredCourses]);
 
   return (
-    <main className="bg-stone-200 min-h-screen p-4 flex flex-col gap-4">
+    <main className="bg-sand-200 min-h-screen p-4 flex flex-col gap-4">
       <Filters
         levelFilter={levelFilter}
         setLevelFilter={setLevelFilter}
@@ -144,7 +144,7 @@ const Home: React.FC = () => {
             <h1 className="text-xl font-medium p-4">
               {room === 1 ? "Workout Room" : "Boxing Room"}
             </h1>
-            <div className="grid bg-stone-100 p-4 rounded-xl gap-4 grid-cols-1 md:grid-cols-5 ">
+            <div className="grid bg-sand-100 p-4 rounded-xl gap-4 grid-cols-1 md:grid-cols-5 ">
               {weekDays.map((day, index) => (
                 <div key={index} className="flex flex-col gap-2">
                   <h2 className="font-medium px-4">{day}</h2>
@@ -160,7 +160,9 @@ const Home: React.FC = () => {
                       );
                     })
                   ) : (
-                    <p className="px-4">No Course</p>
+                    <p className="w-full h-full bg-sand-50 rounded-lg flex items-center justify-center font-medium text-sand-700">
+                      NO COURSES
+                    </p>
                   )}
                 </div>
               ))}

@@ -15,22 +15,22 @@ function Course({
   return (
     <div
       key={idx}
-      className={`bg-stone-50 border-2 min-h-fit  ${
-        course.minAge < 18 ? "border-rose-200" : "border-amber-200"
+      className={`bg-sand-50 border-2 min-h-fit  ${
+        course.minAge < 18 ? "border-highlight-2" : "border-highlight-1"
       } py-4 rounded-xl`}
       style={{ height: `${heightRem}rem` }}
     >
       <div
         className={`flex ${
-          course.minAge < 18 ? "bg-rose-200" : "bg-amber-200"
-        } pt-2 leading-tight px-4 justify-between text-lg font-medium items-baseline w-full pb-2`}
+          course.minAge < 18 ? "bg-highlight-2" : "bg-highlight-1"
+        } pt-2 leading-tight gap-2 px-4 justify-between font-medium items-baseline w-full pb-2`}
       >
         <h3>
           {course.title} &#40;{course.duration}min.&#41;
         </h3>
         <p>{course.startTime}</p>
       </div>
-      <div className="px-4 py-4">
+      <div className="px-4 py-2">
         <div className="flex gap-1">
           {course.level && (
             <p>

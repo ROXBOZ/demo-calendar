@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
-* {
-  @apply text-stone-950;
+body {
+  @apply text-sand-950;
+}
+
+@theme {
+  --color-sand-50: #f9f6f3;
+  --color-sand-100: #f2eae2;
+  --color-sand-200: #decab7;
+  --color-sand-300: #d3b69e;
+  --color-sand-400: #c09477;
+  --color-sand-500: #b37c5c;
+  --color-sand-600: #a56a51;
+  --color-sand-700: #8a5644;
+  --color-sand-800: #70463c;
+  --color-sand-900: #5b3b33;
+  --color-sand-950: #301e1a;
+
+  --color-highlight-1: #fd726c;
+  --color-highlight-2: #b8b500;
 }

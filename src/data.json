@@ -221,7 +221,6 @@
     "room": 2,
     "openToAll": false,
     "minAge": 13,
-    "level": 3,
     "trainers": ["Fatima", "Marly", "Rosa"]
   },
   {
