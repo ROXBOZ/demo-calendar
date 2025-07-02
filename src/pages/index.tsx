@@ -7,6 +7,7 @@ import rawData from "../data.json";
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 const Home: React.FC = () => {
+  //NOTE TypeScript won’t check if the JSON actually matches Course[]. It’s just a type assertion.
   const metadata = rawData as Course[];
   const [levelFilter, setLevelFilter] = useState<string>("");
   const [titleFilter, setTitleFilter] = useState<string>("");
@@ -27,16 +28,20 @@ const Home: React.FC = () => {
     }
   };
 
+  //NOTE Should create getAgeGroup with switch
   const rooms = useMemo(
-    () => Array.from(new Set(metadata.map((c) => c.room))),
+    () => Array.from(new Set(metadata.map((course) => course.room))),
     [metadata]
   );
   const titles = useMemo(
-    () => Array.from(new Set(metadata.map((c) => c.title))),
+    () => Array.from(new Set(metadata.map((course) => course.title))),
     [metadata]
   );
   const trainers = useMemo(
-    () => Array.from(new Set(metadata.flatMap((c) => c.trainers ?? []))).sort(),
+    () =>
+      Array.from(
+        new Set(metadata.flatMap((course) => course.trainers ?? []))
+      ).sort(),
     [metadata]
   );
 
