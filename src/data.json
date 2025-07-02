@@ -68,7 +68,8 @@
     "duration": 120,
     "room": 1,
     "openToAll": true,
-    "minAge": 18
+    "minAge": 18,
+    "trainers": ["Dean"]
   },
   {
     "title": "Thai Chi",
@@ -77,7 +78,8 @@
     "duration": 90,
     "room": 1,
     "openToAll": false,
-    "minAge": 18
+    "minAge": 18,
+    "trainers": ["Inken"]
   },
   {
     "title": "Martial Arts",
@@ -106,7 +108,8 @@
     "duration": 90,
     "room": 1,
     "openToAll": true,
-    "minAge": 18
+    "minAge": 18,
+    "trainers": ["Sharon"]
   },
   {
     "title": "Kickboxing",
@@ -124,7 +127,8 @@
     "duration": 90,
     "minAge": 13,
     "room": 1,
-    "openToAll": false
+    "openToAll": false,
+    "trainers": ["Marly", "Fatima", "Rosa"]
   },
   {
     "title": "Thaiboxing",
@@ -134,7 +138,8 @@
     "level": 1,
     "room": 1,
     "openToAll": false,
-    "minAge": 18
+    "minAge": 18,
+    "trainers": ["Rosa"]
   },
   {
     "title": "Thaiboxing",
@@ -154,7 +159,8 @@
     "duration": 90,
     "room": 2,
     "minAge": 11,
-    "openToAll": false
+    "openToAll": false,
+    "trainers": ["Fatima", "Marly"]
   },
   {
     "title": "Kickboxing",
@@ -175,5 +181,150 @@
     "openToAll": false,
     "minAge": 5,
     "trainers": ["Rosa"]
+  },
+  {
+    "title": "Workout",
+    "weekDay": 2,
+    "startTime": "20:30",
+    "duration": 120,
+    "room": 1,
+    "openToAll": true,
+    "minAge": 18,
+    "trainers": ["Dean"]
+  },
+  {
+    "title": "Back Strength",
+    "weekDay": 2,
+    "startTime": "17:30",
+    "duration": 90,
+    "room": 2,
+    "openToAll": true,
+    "minAge": 18,
+    "trainers": ["Elise"]
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 2,
+    "startTime": "19:30",
+    "duration": 120,
+    "room": 2,
+    "openToAll": false,
+    "minAge": 18,
+    "level": 3,
+    "trainers": ["Angela", "Sina"]
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 3,
+    "startTime": "17:00",
+    "duration": 120,
+    "room": 2,
+    "openToAll": false,
+    "minAge": 13,
+    "level": 3,
+    "trainers": ["Fatima", "Marly", "Rosa"]
+  },
+  {
+    "title": "Workout",
+    "weekDay": 3,
+    "startTime": "18:45",
+    "duration": 120,
+    "room": 2,
+    "openToAll": true,
+    "minAge": 18,
+    "trainers": ["Julia"]
+  },
+  {
+    "title": "Wendo",
+    "weekDay": 4,
+    "startTime": "16:30",
+    "duration": 60,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 7,
+    "trainers": ["Elise"]
+  },
+  {
+    "title": "Kickboxing",
+    "weekDay": 4,
+    "startTime": "18:00",
+    "duration": 120,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 18,
+    "level": 1,
+    "trainers": ["Lindsey"]
+  },
+  {
+    "title": "Wendo",
+    "weekDay": 4,
+    "startTime": "19:45",
+    "duration": 120,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 18,
+    "level": 3,
+    "trainers": ["Inken"]
+  },
+  {
+    "title": "Wendo",
+    "weekDay": 5,
+    "startTime": "16:00",
+    "duration": 60,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 11,
+    "trainers": ["Johanna D."]
+  },
+  {
+    "title": "Wendo",
+    "weekDay": 5,
+    "startTime": "17:00",
+    "duration": 60,
+    "room": 1,
+    "openToAll": false,
+    "minAge": 15,
+    "trainers": ["Charlie"]
+  },
+  {
+    "title": "Workout",
+    "weekDay": 5,
+    "startTime": "18:30",
+    "duration": 60,
+    "room": 1,
+    "openToAll": true,
+    "minAge": 18,
+    "trainers": ["Joa"]
+  },
+  {
+    "title": "Qi Gong",
+    "weekDay": 4,
+    "startTime": "08:45",
+    "duration": 120,
+    "room": 2,
+    "openToAll": false,
+    "minAge": 18,
+    "trainers": ["Jeanette"]
+  },
+  {
+    "title": "Wendo",
+    "weekDay": 4,
+    "startTime": "16:30",
+    "duration": 120,
+    "room": 2,
+    "openToAll": false,
+    "minAge": 7,
+    "trainers": ["Rosa"]
+  },
+  {
+    "title": "Thaiboxing",
+    "weekDay": 5,
+    "startTime": "17:00",
+    "duration": 120,
+    "room": 2,
+    "openToAll": false,
+    "minAge": 18,
+    "level": 3,
+    "trainers": ["Joa"]
   }
 ]

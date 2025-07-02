@@ -121,7 +121,7 @@ const Home: React.FC = () => {
   }, [rooms, filteredCourses]);
 
   return (
-    <main className="bg-stone-300 min-h-screen p-4 flex flex-col gap-4">
+    <main className="bg-stone-200 min-h-screen p-4 flex flex-col gap-4">
       <Filters
         levelFilter={levelFilter}
         setLevelFilter={setLevelFilter}
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
                       );
                     })
                   ) : (
-                    <p>No Course</p>
+                    <p className="px-4">No Course</p>
                   )}
                 </div>
               ))}

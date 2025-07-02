@@ -16,9 +16,9 @@ export const Filters: React.FC<FiltersProps> = ({
   resetFilters,
 }) => {
   return (
-    <div className="flex gap-4 justify-between items-baseline bg-amber-100 p-4 rounded-lg">
+    <div className="flex gap-4 justify-between items-baseline bg-stone-300 p-4 rounded-lg">
       <div className="flex gap-4">
-        <div className="flex gap-3 items-baseline">
+        <div className="flex gap-3 items-baseline bg-stone-100 p-4 rounded-lg">
           <label className="font-semibold">Title</label>
           <select
             className="hover:cursor-pointer"
@@ -37,7 +37,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline">
+        <div className="flex gap-3 items-baseline bg-stone-100 p-4 rounded-lg">
           <label className="font-semibold">Level</label>
           <select
             className="hover:cursor-pointer"
@@ -54,7 +54,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline">
+        <div className="flex gap-3 items-baseline bg-stone-100 p-4 rounded-lg">
           <label className="font-semibold">Trainer</label>
           <select
             className="hover:cursor-pointer"
@@ -73,7 +73,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline">
+        <div className="flex gap-3 items-baseline bg-stone-100 p-4 rounded-lg">
           <label className="font-semibold">Age Group</label>
           <select
             className="hover:cursor-pointer"
@@ -89,7 +89,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline">
+        <div className="flex gap-3 items-baseline bg-stone-100 p-4 rounded-lg">
           <input
             type="checkbox"
             id="openToAll"
