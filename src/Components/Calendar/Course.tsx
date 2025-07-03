@@ -10,15 +10,15 @@ function Course({
   idx: number;
   getLevelLabel: (level?: number) => string;
 }) {
-  const baseHeight = 9;
-  const heightRem = (course.duration / 60) * baseHeight;
+  // const baseHeight = 9;
+  // const heightRem = (course.duration / 60) * baseHeight;
   return (
     <div
       key={idx}
-      className={`bg-sand-50 border-2 min-h-fit  ${
+      className={`bg-sand-50 border-2 h-36 overflow-hidden  ${
         course.minAge < 18 ? "border-highlight-2" : "border-highlight-1"
-      } py-4 rounded-xl`}
-      style={{ height: `${heightRem}rem` }}
+      } pb-4 rounded-xl`}
+      // style={{ height: `${heightRem}rem` }}
     >
       <div
         className={`flex ${

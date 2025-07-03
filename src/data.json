@@ -118,7 +118,8 @@
     "duration": 60,
     "minAge": 11,
     "room": 1,
-    "openToAll": false
+    "openToAll": false,
+    "trainers": ["Marly", "Fatima", "Rosa"]
   },
   {
     "title": "Kickboxing",

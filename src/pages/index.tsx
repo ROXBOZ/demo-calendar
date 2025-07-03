@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 
 import Course from "@/Components/Calendar/Course";
 import { Filters } from "@/Components/Calendar/Filters";
+import Link from "next/link";
 import rawData from "../data.json";
 
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -122,21 +123,29 @@ const Home: React.FC = () => {
 
   return (
     <main className="bg-sand-200 min-h-screen p-4 flex flex-col gap-4">
-      <Filters
-        levelFilter={levelFilter}
-        setLevelFilter={setLevelFilter}
-        titleFilter={titleFilter}
-        setTitleFilter={setTitleFilter}
-        trainerFilter={trainerFilter}
-        setTrainerFilter={setTrainerFilter}
-        ageGroup={ageGroup}
-        setAgeGroup={setAgeGroup}
-        openToAllOnly={openToAllOnly}
-        setOpenToAllOnly={setOpenToAllOnly}
-        titles={titles}
-        trainers={trainers}
-        resetFilters={resetFilters}
-      />
+      <div className="flex justify-between items-baseline">
+        <Filters
+          levelFilter={levelFilter}
+          setLevelFilter={setLevelFilter}
+          titleFilter={titleFilter}
+          setTitleFilter={setTitleFilter}
+          trainerFilter={trainerFilter}
+          setTrainerFilter={setTrainerFilter}
+          ageGroup={ageGroup}
+          setAgeGroup={setAgeGroup}
+          openToAllOnly={openToAllOnly}
+          setOpenToAllOnly={setOpenToAllOnly}
+          titles={titles}
+          trainers={trainers}
+          resetFilters={resetFilters}
+        />
+        <Link
+          className="p-4 rounded-lg bg-highlight-2 font-medium"
+          href="/form"
+        >
+          Add course
+        </Link>
+      </div>
 
       <div className="flex flex-col gap-4">
         {rooms.map((room) => (
