@@ -1,10 +1,10 @@
 # Lowkick Calendar – demo
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app). It is designed as a **comprehensive developer showcase** to demonstrate my full-stack modern web development skilsl, with an emphasis on scalability, UI/UX best practices, accessibility, and robust architecture.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app). It is designed as a **comprehensive developer showcase** to demonstrate my full-stack modern web development skills.
 
 ## Project Goals
 
-This application serves as a **calendar interface for structured course schedules**. It is built to demonstrate expertise in:
+This application serves as a **calendar for martial arts course schedule**. It is built to demonstrate expertise in:
 
 - TypeScript with strict typing for data safety
 - Component-driven architecture (React + Next.js)
@@ -22,17 +22,15 @@ This application serves as a **calendar interface for structured course schedule
 | -------------------------- [ ] | ---------------------------------------------------------- [ ] |
 | Frontend Framework | **Next.js 14** (App Router) |
 | Language | **TypeScript** |
-| Styling | **TailwindCSS**, responsive layout |
+| Styling | **TailwindCSS v.4**, responsive layout, scalable UI system |
 | State Management | **React hooks**, `useMemo`, `useState` |
 | Testing (Planned) | **Jest**, **React Testing Library** |
 | Backend API (Planned) | **Node.js**, **Express**, **MongoDB (MIRN stack)** |
-| Alternative CMS (Optional) | **Sanity.io** as a Headless CMS |
-| Accessibility | **WCAG 2.1** standards, keyboard navigation, semantic HTML |
+| Alternative CMS (Planned) | **Sanity.io** as a Headless CMS |
+| Accessibility (Planned) | **WCAG 2.1** standards, keyboard navigation, semantic HTML |
 | Deployment | **Vercel**, optimized for performance |
 
 ---
-
-## Core Features
 
 ### Dynamic Course Filtering System
 
@@ -53,11 +51,8 @@ The filtering is implemented with `useMemo` to optimize performance by avoiding 
 
 ### Strong Typing with TypeScript
 
-All data interfaces (like `Course[]`) are strictly typed to:
-
-- Reduce runtime bugs
-- Enable powerful IDE autocompletion and error detection
-- Improve long-term maintainability
+- All data interfaces (like `Course[]`) are strictly typed
+- Use of Zod (planned)
 
 ### Accessibility (a11y) Principles
 
@@ -67,7 +62,7 @@ This project follows **Web Content Accessibility Guidelines (WCAG 2.1)** with:
 - [ ] Keyboard navigable interface
 - [ ] High-contrast, readable typography
 - [ ] Clear focus styles
-- [ ] Meaningful alt texts and ARIA roles (to be fully added)
+- [ ] Meaningful alt texts or ARIA roles (to be fully added)
 
 ### UI System & Web Design Principles
 
@@ -76,6 +71,7 @@ This project follows **Web Content Accessibility Guidelines (WCAG 2.1)** with:
 - [ ] Modern utility-first styling via Tailwind
 - [ ] Accessible, readable UI with clear hierarchy and spacing
 - [ ] Room-specific views, weekday breakdown, and dynamic time sorting
+- [ ] Animations with GSAP or Framer motions
 
 ---
 

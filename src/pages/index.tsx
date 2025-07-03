@@ -160,9 +160,18 @@ const Home: React.FC = () => {
                       );
                     })
                   ) : (
-                    <p className="w-full h-full bg-sand-50 rounded-lg flex items-center justify-center font-medium text-sand-700">
+                    <button
+                      onClick={() => {
+                        setLevelFilter("");
+                        setTitleFilter("");
+                        setTrainerFilter("");
+                        setAgeGroup("");
+                        setOpenToAllOnly(false);
+                      }}
+                      className="w-full hover:cursor-pointer h-full bg-sand-50 rounded-lg flex items-center justify-center font-medium text-sand-700"
+                    >
                       NO COURSES
-                    </p>
+                    </button>
                   )}
                 </div>
               ))}
@@ -170,6 +179,9 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
+      <p className="mt-24 w-full flex text-center text-sm justify-center">
+        Roxanne Borloz | ROXBOZ | 2025
+      </p>
     </main>
   );
 };
