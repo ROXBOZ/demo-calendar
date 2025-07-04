@@ -21,11 +21,12 @@ body {
   --color-highlight-2: #b8b500;
 }
 
-@layer utilities {
+/* @layer utilities {
   .rounded {
-    border-radius: 1.25rem;
+    border-radius: 1rem;
   }
-}
+} */
 .select-classes {
-  @apply w-full p-2 border rounded-lg border-sand-500;
+  @apply w-full p-2 border  border-highlight-2;
+  border-radius: 0.25rem;
 }

@@ -17,7 +17,7 @@ function Course({
       key={idx}
       className={`bg-sand-50 border-2 min-h-36 overflow-hidden  ${
         course.minAge < 18 ? "border-highlight-2" : "border-highlight-1"
-      } pb-4 rounded`}
+      } pb-4 rounded-lg`}
       // style={{ height: `${heightRem}rem` }}
     >
       <div

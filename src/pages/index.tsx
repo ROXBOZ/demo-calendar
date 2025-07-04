@@ -185,6 +185,9 @@ const Home: React.FC = () => {
                       NO COURSES
                     </button>
                   )}
+                  <button className="disabled opacity-30 font-semibold">
+                    + Add course
+                  </button>
                 </div>
               ))}
             </div>

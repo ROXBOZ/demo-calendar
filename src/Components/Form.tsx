@@ -44,7 +44,7 @@ function Form({ setShowModal }: { setShowModal: (show: boolean) => void }) {
 
   return (
     <div className="absolute top-0 bg-sand-950/60 right-0 left-0 min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-[65ch] bg-sand-50 rounded shadow-md p-12 h-fit relative w-full">
+      <div className="max-w-[65ch] z-50 bg-sand-50 rounded shadow-md p-12 h-fit relative w-full">
         <button
           className="absolute top-4 right-12 px-3 rounded hover:bg-sand-100"
           onClick={() => {
@@ -54,6 +54,7 @@ function Form({ setShowModal }: { setShowModal: (show: boolean) => void }) {
           close
         </button>
         <form onSubmit={handleSubmit} className="space-y-4 w-full">
+          <h2 className="text-lg font-medium">Add a new course</h2>
           {/* title */}
           <div className="flex gap-2 items-baseline">
             <label htmlFor="title" className="whitespace-nowrap">
@@ -78,7 +79,7 @@ function Form({ setShowModal }: { setShowModal: (show: boolean) => void }) {
               ))}
             </select>
           </div>
-          <div className="bg-sand-100 flex flex-col gap-4 p-5 rounded">
+          <div className="border-y border-highlight-2 flex flex-col gap-4 py-4">
             {/* Day of the week */}
             <div className="flex gap-2 items-baseline">
               <label htmlFor="weekDay" className="whitespace-nowrap">
