@@ -15,9 +15,9 @@ function Course({
   return (
     <div
       key={idx}
-      className={`bg-sand-50 border-2 h-36 overflow-hidden  ${
+      className={`bg-sand-50 border-2 min-h-36 overflow-hidden  ${
         course.minAge < 18 ? "border-highlight-2" : "border-highlight-1"
-      } pb-4 rounded-xl`}
+      } pb-4 rounded`}
       // style={{ height: `${heightRem}rem` }}
     >
       <div
@@ -31,25 +31,22 @@ function Course({
         <p>{course.startTime}</p>
       </div>
       <div className="px-4 py-2">
-        <div className="flex gap-1">
-          {course.level && (
-            <p>
-              {getLevelLabel(course.level)} <span>level</span>
-              {course.trainers && ","}
-            </p>
-          )}
-          {course.trainers && (
-            <div>
-              {course.level ? "with " : "With "}
-              {course.trainers?.map((trainer, index) => (
-                <span key={index}>
-                  {index > 0 && " / "}
-                  {trainer}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
+        {course.level && (
+          <p>
+            {getLevelLabel(course.level)} <span>level</span>
+          </p>
+        )}
+        {course.trainers && (
+          <div>
+            With{" "}
+            {course.trainers?.map((trainer, index) => (
+              <span key={index}>
+                {index > 0 && " or "}
+                {trainer}
+              </span>
+            ))}
+          </div>
+        )}
         {course.minAge && course.minAge < 18 && (
           <p>For girls* from {course.minAge} years old</p>
         )}

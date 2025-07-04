@@ -16,9 +16,9 @@ export const Filters: React.FC<FiltersProps> = ({
   resetFilters,
 }) => {
   return (
-    <div className="flex flex-wr  gap-4 justify-between items-baseline bg-chocolate-200 p-4 rounded-lg">
+    <div className="flex flex-wr  gap-4 justify-between items-baseline bg-chocolate-200 p-4 rounded">
       <div className="flex gap-4 flex-wrap">
-        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded-lg">
+        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded">
           <label className="font-semibold">Title</label>
           <select
             className="hover:cursor-pointer"
@@ -37,7 +37,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded-lg">
+        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded">
           <label className="font-semibold">Level</label>
           <select
             className="hover:cursor-pointer"
@@ -54,7 +54,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded-lg">
+        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded">
           <label className="font-semibold">Trainer</label>
           <select
             className="hover:cursor-pointer"
@@ -73,7 +73,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded-lg">
+        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded">
           <label className="font-semibold">Age Group</label>
           <select
             className="hover:cursor-pointer"
@@ -89,7 +89,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded-lg">
+        <div className="flex gap-3 items-baseline bg-sand-100 p-4 rounded">
           <input
             type="checkbox"
             id="openToAll"
@@ -107,7 +107,7 @@ export const Filters: React.FC<FiltersProps> = ({
       </div>
 
       <button
-        className="bg-sand-300 whitespace-nowrap ring-inset hover:ring-2 hover:ring-sand-400 active:bg-sand-400 hover:delay-200 hover:duration-200 px-6 py-3 rounded-lg font-semibold hover:cursor-pointer"
+        className="bg-sand-300 whitespace-nowrap ring-inset hover:ring-2 hover:ring-sand-400 active:bg-sand-400 hover:delay-200 hover:duration-200 px-6 py-3 rounded font-semibold hover:cursor-pointer"
         onClick={() => {
           setLevelFilter("");
           setTitleFilter("");

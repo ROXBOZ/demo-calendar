@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 
 import Course from "@/Components/Calendar/Course";
 import { Filters } from "@/Components/Calendar/Filters";
-import Link from "next/link";
+import Form from "@/Components/Form";
 import rawData from "../data.json";
 
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const [trainerFilter, setTrainerFilter] = useState<string>("");
   const [ageGroup, setAgeGroup] = useState<"youngs" | "adults" | "">("");
   const [openToAllOnly, setOpenToAllOnly] = useState<boolean>(false);
-
+  const [showModal, setShowModal] = useState(false);
   const getLevelLabel = (level?: number) => {
     switch (level) {
       case 1:
@@ -139,21 +139,24 @@ const Home: React.FC = () => {
           trainers={trainers}
           resetFilters={resetFilters}
         />
-        <Link
-          className="p-4 rounded-lg bg-highlight-2 font-medium"
-          href="/form"
+        <button
+          className="p-4 rounded bg-highlight-2 font-medium"
+          onClick={() => {
+            setShowModal(true);
+          }}
         >
           Add course
-        </Link>
+        </button>
       </div>
 
       <div className="flex flex-col gap-4">
+        {showModal && <Form setShowModal={setShowModal} />}
         {rooms.map((room) => (
           <div key={room}>
             <h1 className="text-xl font-medium p-4">
               {room === 1 ? "Workout Room" : "Boxing Room"}
             </h1>
-            <div className="grid bg-sand-100 p-4 rounded-xl gap-4 grid-cols-1 md:grid-cols-5 ">
+            <div className="grid bg-sand-100 p-4 rounded gap-4 grid-cols-1 md:grid-cols-5 ">
               {weekDays.map((day, index) => (
                 <div key={index} className="flex flex-col gap-2">
                   <h2 className="font-medium px-4">{day}</h2>
@@ -177,7 +180,7 @@ const Home: React.FC = () => {
                         setAgeGroup("");
                         setOpenToAllOnly(false);
                       }}
-                      className="w-full hover:cursor-pointer h-full bg-sand-50 rounded-lg flex items-center justify-center font-medium text-sand-700"
+                      className="w-full hover:cursor-pointer h-full bg-sand-50 rounded flex items-center justify-center font-medium text-sand-700"
                     >
                       NO COURSES
                     </button>
