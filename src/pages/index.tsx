@@ -16,6 +16,8 @@ const Home: React.FC = () => {
   const [ageGroup, setAgeGroup] = useState<"youngs" | "adults" | "">("");
   const [openToAllOnly, setOpenToAllOnly] = useState<boolean>(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(1);
+
   const getLevelLabel = (level?: number) => {
     switch (level) {
       case 1:
@@ -32,22 +34,21 @@ const Home: React.FC = () => {
   //NOTE Should create getAgeGroup with switch
   const rooms = useMemo(
     () => Array.from(new Set(metadata.map((course) => course.room))),
-    [metadata]
+    [metadata],
   );
   const titles = useMemo(
     () => Array.from(new Set(metadata.map((course) => course.title))),
-    [metadata]
+    [metadata],
   );
   const trainers = useMemo(
     () =>
       Array.from(
-        new Set(metadata.flatMap((course) => course.trainers ?? []))
+        new Set(metadata.flatMap((course) => course.trainers ?? [])),
       ).sort(),
-    [metadata]
+    [metadata],
   );
-
   const resetFilters = (
-    filterType: "level" | "title" | "trainer" | "ageGroup" | "openToAll"
+    filterType: "level" | "title" | "trainer" | "ageGroup" | "openToAll",
   ) => {
     if (filterType === "level") {
       setTitleFilter("");
@@ -108,22 +109,27 @@ const Home: React.FC = () => {
   ]);
 
   const coursesByRoomAndDay = useMemo(() => {
-    return rooms.reduce((acc, room) => {
-      acc[room] = weekDays.map((_, index) => {
-        const dayIndex = index + 1;
-        return filteredCourses
-          .filter(
-            (course) => course.room === room && course.weekDay === dayIndex
-          )
-          .sort((a, b) => (a.startTime ?? "").localeCompare(b.startTime ?? ""));
-      });
-      return acc;
-    }, {} as Record<number, Course[][]>);
+    return rooms.reduce(
+      (acc, room) => {
+        acc[room] = weekDays.map((_, index) => {
+          const dayIndex = index + 1;
+          return filteredCourses
+            .filter(
+              (course) => course.room === room && course.weekDay === dayIndex,
+            )
+            .sort((a, b) =>
+              (a.startTime ?? "").localeCompare(b.startTime ?? ""),
+            );
+        });
+        return acc;
+      },
+      {} as Record<number, Course[][]>,
+    );
   }, [rooms, filteredCourses]);
 
   return (
-    <main className="bg-sand-200 min-h-screen p-4 flex flex-col gap-4">
-      <div className="flex justify-between items-baseline">
+    <main className="bg-base-200 flex min-h-screen flex-col gap-4 p-4">
+      <div className="hidden flex-row items-baseline justify-between md:flex">
         <Filters
           levelFilter={levelFilter}
           setLevelFilter={setLevelFilter}
@@ -139,27 +145,26 @@ const Home: React.FC = () => {
           trainers={trainers}
           resetFilters={resetFilters}
         />
-        <button
-          className="p-4 rounded bg-highlight-2 font-medium"
-          onClick={() => {
-            setShowModal(true);
-          }}
-        >
-          Add course
-        </button>
       </div>
 
       <div className="flex flex-col gap-4">
-        {showModal && <Form setShowModal={setShowModal} />}
+        {showModal && (
+          <Form
+            setShowModal={setShowModal}
+            selectedDay={selectedDay ? selectedDay : 1}
+            setSelectedDay={setSelectedDay}
+          />
+        )}
         {rooms.map((room) => (
           <div key={room}>
-            <h1 className="text-xl font-medium p-4">
+            <h1 className="p-4 text-xl font-medium">
               {room === 1 ? "Workout Room" : "Boxing Room"}
             </h1>
-            <div className="grid bg-sand-100 p-4 rounded gap-4 grid-cols-1 md:grid-cols-5 ">
+            <div className="bg-base-100 grid grid-cols-1 gap-4 rounded p-4 md:grid-cols-5">
               {weekDays.map((day, index) => (
                 <div key={index} className="flex flex-col gap-2">
-                  <h2 className="font-medium px-4">{day}</h2>
+                  <h2 className="px-4 font-medium">{day}</h2>
+
                   {coursesByRoomAndDay[room][index].length > 0 ? (
                     coursesByRoomAndDay[room][index].map((course, idx) => {
                       return (
@@ -180,12 +185,19 @@ const Home: React.FC = () => {
                         setAgeGroup("");
                         setOpenToAllOnly(false);
                       }}
-                      className="w-full hover:cursor-pointer h-full bg-sand-50 rounded flex items-center justify-center font-medium text-sand-700"
+                      className="bg-base-50 text-base-700 flex h-full w-full items-center justify-center rounded font-medium hover:cursor-pointer"
                     >
                       NO COURSES
                     </button>
                   )}
-                  <button className="disabled opacity-30 font-semibold">
+
+                  <button
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedDay(index + 1);
+                    }}
+                    className="bg-base-200 hover:ring-base-300 active:bg-base-300 rounded-md py-1 font-semibold hover:cursor-pointer hover:ring-2 hover:delay-200 hover:duration-300 hover:ring-inset"
+                  >
                     + Add course
                   </button>
                 </div>
@@ -194,7 +206,7 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
-      <p className="mt-24 w-full flex text-center text-sm justify-center">
+      <p className="mt-24 flex w-full justify-center text-center text-sm">
         Roxanne Borloz | ROXBOZ | 2025
       </p>
     </main>
