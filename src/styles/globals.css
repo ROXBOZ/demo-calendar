@@ -16,12 +16,9 @@ body {
   --color-base-800: #70463c;
   --color-base-900: #5b3b33;
   --color-base-950: #301e1a;
-
-  --color-highlight-1: #fd726c;
-  --color-highlight-2: #b8b500;
 }
 
 .form-input {
-  @apply border-highlight-2 w-full border p-2;
+  @apply w-full border border-teal-500 p-2;
   border-radius: 0.25rem;
 }
