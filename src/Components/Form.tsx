@@ -21,7 +21,7 @@ function Form({
         .flat()
         .filter(Boolean),
     ),
-  ];
+  ].sort((a, b) => a.localeCompare(b));
 
   const [form, setForm] = useState({
     title: demoTitles[0],
@@ -230,10 +230,11 @@ function Form({
             {/* openToAll */}
             <div className="flex items-center gap-2">
               <label htmlFor="openToAll" className="whitespace-nowrap">
-                Open for trial
+                This course is open to all
               </label>
               <div className="flex py-1">
                 <input
+                  className="checkbox"
                   type="checkbox"
                   name="openToAll"
                   id="openToAll"
@@ -308,10 +309,11 @@ function Form({
             <label className="whitespace-nowrap">
               Trainer(s) <span className="text-orange-500">*</span>
             </label>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-2">
               {demoTrainers.map((trainer) => (
                 <label key={trainer} className="inline-flex items-center gap-1">
                   <input
+                    className="checkbox"
                     type="checkbox"
                     name="trainers"
                     value={trainer}

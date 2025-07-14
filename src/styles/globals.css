@@ -19,6 +19,10 @@ body {
 }
 
 .form-input {
-  @apply w-full border border-teal-500 p-2;
+  @apply w-full border-2 border-teal-500 p-2 hover:cursor-pointer hover:bg-teal-50 hover:delay-200 hover:duration-200;
   border-radius: 0.25rem;
+}
+
+.checkbox {
+  @apply size-5 cursor-pointer appearance-none rounded border-2 border-teal-500 bg-white leading-4 font-bold transition duration-200 checked:border-teal-600 checked:bg-teal-500 checked:before:text-white checked:before:content-['✓'];
 }
