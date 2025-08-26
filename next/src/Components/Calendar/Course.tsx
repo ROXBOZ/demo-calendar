@@ -10,15 +10,12 @@ function Course({
   idx: number;
   getLevelLabel: (level?: number) => string;
 }) {
-  // const baseHeight = 9;
-  // const heightRem = (course.duration / 60) * baseHeight;
   return (
     <div
       key={idx}
       className={`bg-base-50 min-h-36 overflow-hidden border-2 ${
         course.minAge < 18 ? "border-teal-500" : "border-orange-500"
       } rounded-lg pb-4`}
-      // style={{ height: `${heightRem}rem` }}
     >
       <div
         className={`flex ${

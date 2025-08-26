@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import Course from "./Calendar/Course";
-import rawData from "../data.json";
-import { weekDays } from "@/pages";
+import Course from "../Calendar/Course";
+import rawData from "../../data.json";
+import { weekDays } from "../Calendar";
 
 function Form({
   setShowModal,

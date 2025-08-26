@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>Demo Website</title>
+
         <meta name="description" content="The meta description here." />
       </Head>
       <body className="bg-base-200 antialiased">
