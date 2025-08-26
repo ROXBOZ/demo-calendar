@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
+import Course from "./Calendar/Course";
 import rawData from "../data.json";
+import { weekDays } from "@/pages";
 
 function Form({
   setShowModal,
@@ -32,9 +34,9 @@ function Form({
     minAge: 18,
     openToAll: false,
     trainers: [demoTrainers[0]],
+    room: 1,
   });
 
-  const weekDay = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   const [selectedTitle, setSelectedTitle] = useState("");
   const [selectedDuration, setSelectedDuration] = useState(60);
   const [selectedLevel, setSelectedLevel] = useState(1);
@@ -42,6 +44,7 @@ function Form({
   const [hour, minute] = form.startTime.split(":");
   const [openToAll, setOpenToAll] = useState(false);
   const [selectedTrainers, setSelectedTrainers] = useState([] as string[]);
+  const [selectedRoom, setSelectedRoom] = useState(1);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -55,6 +58,19 @@ function Form({
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [setShowModal]);
+
+  const getLevelLabel = (level?: number) => {
+    switch (level) {
+      case 1:
+        return "Beginner";
+      case 2:
+        return "Intermediate";
+      case 3:
+        return "Advanced";
+      default:
+        return "";
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,7 +105,7 @@ function Form({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-base-50 relative z-50 h-fit w-full max-w-[65ch] rounded p-12 shadow-md"
+        className="bg-base-50 relative z-50 h-fit w-full max-w-[100ch] rounded p-12 shadow-md"
       >
         <button
           className="hover:bg-base-100 absolute top-4 right-4 flex items-center gap-1 rounded px-3 hover:cursor-pointer"
@@ -100,250 +116,286 @@ function Form({
           <span>✖</span> <span className="sr-only text-sm">close</span>
         </button>
         <form onSubmit={handleSubmit} className="w-full space-y-4">
-          <h2 className="text-lg font-medium">Add a new course</h2>
-          {/* title */}
-          <div className="flex items-baseline gap-2">
-            <label htmlFor="title" className="whitespace-nowrap">
-              Title of the Course <span className="text-orange-500">*</span>
-            </label>
-            <select
-              name="title"
-              id="title"
-              value={selectedTitle}
-              onChange={(e) => {
-                const value = e.target.value;
-                setSelectedTitle(value);
-                setForm({ ...form, title: value });
-              }}
-              required
-              className="form-input"
-            >
-              {demoTitles.map((title) => (
-                <option key={title} value={title}>
-                  {title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col gap-4 border-y border-teal-500 py-4">
-            {/* Day of the week */}
-            <div className="flex items-baseline gap-2">
-              <label htmlFor="weekDay" className="whitespace-nowrap">
-                Day of the week <span className="text-orange-500">*</span>
-              </label>
-              <select
-                name="weekDay"
-                id="weekDay"
-                value={selectedDay}
-                onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setSelectedDay(value);
-                  setForm({ ...form, weekDay: value });
-                }}
-                required
-                className="form-input"
-              >
-                <option value="" disabled>
-                  Select a day
-                </option>
-                {weekDay.map((day, index) => (
-                  <option key={index} value={index + 1}>
-                    {day}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Time */}
-            <div className="flex items-baseline gap-2">
-              <label htmlFor="startTime" className="whitespace-nowrap">
-                Starting Time <span className="text-orange-500">*</span>
-              </label>
-              <div className="flex w-full space-x-2">
+          <div className="flex w-full gap-4">
+            <div className="flex-1">
+              <h2 className="text-lg font-medium">Add a new course</h2>
+              {/* title */}
+              <div className="flex items-baseline gap-2">
+                <label htmlFor="title" className="whitespace-nowrap">
+                  Title of the Course <span className="text-orange-500">*</span>
+                </label>
                 <select
-                  name="startHour"
-                  value={hour}
+                  name="title"
+                  id="title"
+                  value={selectedTitle}
                   onChange={(e) => {
-                    const newHour = e.target.value.padStart(2, "0");
-                    setForm({
-                      ...form,
-                      startTime: `${newHour}:${minute}`,
-                    });
+                    const value = e.target.value;
+                    setSelectedTitle(value);
+                    setForm({ ...form, title: value });
                   }}
                   required
                   className="form-input"
                 >
-                  {Array.from({ length: 24 }, (_, i) => {
-                    const h = i.toString().padStart(2, "0");
-                    return (
-                      <option key={h} value={h}>
-                        {h}
-                      </option>
-                    );
-                  })}
-                </select>
-
-                <select
-                  name="startMinute"
-                  value={minute}
-                  onChange={(e) => {
-                    const newMinute = e.target.value.padStart(2, "0");
-                    setForm({
-                      ...form,
-                      startTime: `${hour}:${newMinute}`,
-                    });
-                  }}
-                  required
-                  className="form-input"
-                >
-                  {["00", "15", "30", "45"].map((m) => (
-                    <option key={m} value={m}>
-                      {m}
+                  {demoTitles.map((title) => (
+                    <option key={title} value={title}>
+                      {title}
                     </option>
                   ))}
                 </select>
               </div>
-            </div>
+              <div className="my-4 flex flex-col gap-4 border-y border-teal-500 py-4">
+                {/* Day of the week */}
+                <div className="flex items-baseline gap-2">
+                  <label htmlFor="weekDay" className="whitespace-nowrap">
+                    Day of the week <span className="text-orange-500">*</span>
+                  </label>
+                  <select
+                    name="weekDay"
+                    id="weekDay"
+                    value={selectedDay}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      setSelectedDay(value);
+                      setForm({ ...form, weekDay: value });
+                    }}
+                    required
+                    className="form-input"
+                  >
+                    <option value="" disabled>
+                      Select a day
+                    </option>
+                    {weekDays.map((day, index) => (
+                      <option key={index} value={index + 1}>
+                        {day}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            {/* Duration */}
-            <div className="flex items-baseline gap-2">
-              <label htmlFor="duration" className="whitespace-nowrap">
-                Duration <span className="text-orange-500">*</span>
-              </label>
-              <select
-                name="duration"
-                id="duration"
-                value={selectedDuration}
-                onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setSelectedDuration(value);
-                  setForm({ ...form, duration: value });
-                }}
-                required
-                className="form-input"
-              >
-                <option value={60}>60 minutes</option>
-                <option value={90}>90 minutes</option>
-                <option value={120}>120 minutes</option>
-              </select>
-            </div>
-            {/* openToAll */}
-            <div className="flex items-center gap-2">
-              <label htmlFor="openToAll" className="whitespace-nowrap">
-                This course is open to all
-              </label>
-              <div className="flex py-1">
-                <input
-                  className="checkbox"
-                  type="checkbox"
-                  name="openToAll"
-                  id="openToAll"
-                  checked={openToAll}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    const value = e.target.checked;
-                    setOpenToAll(value);
-                    setForm({ ...form, openToAll: value });
+                {/* Time */}
+                <div className="flex items-baseline gap-2">
+                  <label htmlFor="startTime" className="whitespace-nowrap">
+                    Starting Time <span className="text-orange-500">*</span>
+                  </label>
+                  <div className="flex w-full space-x-2">
+                    <select
+                      name="startHour"
+                      value={hour}
+                      onChange={(e) => {
+                        const newHour = e.target.value.padStart(2, "0");
+                        setForm({
+                          ...form,
+                          startTime: `${newHour}:${minute}`,
+                        });
+                      }}
+                      required
+                      className="form-input"
+                    >
+                      {Array.from({ length: 24 }, (_, i) => {
+                        const h = i.toString().padStart(2, "0");
+                        return (
+                          <option key={h} value={h}>
+                            {h}
+                          </option>
+                        );
+                      })}
+                    </select>
+
+                    <select
+                      name="startMinute"
+                      value={minute}
+                      onChange={(e) => {
+                        const newMinute = e.target.value.padStart(2, "0");
+                        setForm({
+                          ...form,
+                          startTime: `${hour}:${newMinute}`,
+                        });
+                      }}
+                      required
+                      className="form-input"
+                    >
+                      {["00", "15", "30", "45"].map((m) => (
+                        <option key={m} value={m}>
+                          {m}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Duration */}
+                <div className="flex items-baseline gap-2">
+                  <label htmlFor="duration" className="whitespace-nowrap">
+                    Duration <span className="text-orange-500">*</span>
+                  </label>
+                  <select
+                    name="duration"
+                    id="duration"
+                    value={selectedDuration}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      setSelectedDuration(value);
+                      setForm({ ...form, duration: value });
+                    }}
+                    required
+                    className="form-input"
+                  >
+                    <option value={60}>60 minutes</option>
+                    <option value={90}>90 minutes</option>
+                    <option value={120}>120 minutes</option>
+                  </select>
+                </div>
+                {/* Room */}
+                <div className="flex items-baseline gap-2">
+                  <label htmlFor="room" className="whitespace-nowrap">
+                    Room <span className="text-orange-500">*</span>
+                  </label>
+                  <select
+                    name="room"
+                    id="room"
+                    value={selectedRoom}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      setSelectedRoom(value);
+                      setForm({ ...form, room: value });
+                    }}
+                    required
+                    className="form-input"
+                  >
+                    <option value={1}>Workout Room</option>
+                    <option value={2}>Boxing Room</option>
+                  </select>
+                </div>
+                {/* openToAll */}
+                <div className="flex items-center gap-2">
+                  <label htmlFor="openToAll" className="whitespace-nowrap">
+                    This course is open to all
+                  </label>
+                  <div className="flex py-1">
+                    <input
+                      className="checkbox"
+                      type="checkbox"
+                      name="openToAll"
+                      id="openToAll"
+                      checked={openToAll}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const value = e.target.checked;
+                        setOpenToAll(value);
+                        setForm({ ...form, openToAll: value });
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Level */}
+              <div className="mb-4 flex items-baseline gap-2">
+                <label htmlFor="level" className="whitespace-nowrap">
+                  Level <span className="text-orange-500">*</span>
+                </label>
+                <select
+                  name="level"
+                  id="level"
+                  value={selectedLevel}
+                  onChange={(e) => {
+                    const value = Number(e.target.value);
+                    setSelectedLevel(value);
+                    setForm({ ...form, level: value });
                   }}
+                  required
+                  className="form-input"
+                >
+                  <option value={1}>Beginner</option>
+                  <option value={2}>Intermediate</option>
+                  <option value={3}>Advanced</option>
+                </select>
+              </div>
+              {/* Audience */}
+              <div className="flex items-baseline gap-2">
+                <label htmlFor="minAge" className="whitespace-nowrap">
+                  Minimum Age <span className="text-orange-500">*</span>
+                </label>
+                <div className="w-full">
+                  <input
+                    name="minAge"
+                    id="minAge"
+                    value={minAge}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      setMinAge(value);
+                      setForm({ ...form, minAge: value });
+                    }}
+                    required
+                    className="form-input"
+                  />
+                  {minAge && minAge > 1 && minAge < 18 ? (
+                    <p className="px-2 text-xs text-green-800">
+                      This course will be shown as Course for Youngs from{" "}
+                      {minAge} years old.
+                    </p>
+                  ) : minAge && minAge >= 18 ? (
+                    <p className="px-2 text-xs text-green-800">
+                      This course will be shown as Course for Adults.
+                    </p>
+                  ) : minAge === 0 ? ( // check explicitly for zero here
+                    <p className="px-2 text-xs text-red-800">
+                      Please enter a minimum age.
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+              {/* Trainers */}
+              <div className="my-4 flex flex-col gap-2 border-t border-teal-500 py-4">
+                <label className="whitespace-nowrap">
+                  Trainer(s) <span className="text-orange-500">*</span>
+                </label>
+                <div className="grid grid-cols-4 gap-2">
+                  {demoTrainers.map((trainer) => (
+                    <label
+                      key={trainer}
+                      className="inline-flex items-center gap-1"
+                    >
+                      <input
+                        className="checkbox"
+                        type="checkbox"
+                        name="trainers"
+                        value={trainer}
+                        checked={selectedTrainers.includes(trainer as string)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            const newSelected = [
+                              ...selectedTrainers,
+                              trainer,
+                            ].filter((t): t is string => typeof t === "string");
+                            setSelectedTrainers(newSelected);
+                            setForm({ ...form, trainers: newSelected });
+                          } else {
+                            const newSelected = selectedTrainers
+                              .filter((t) => t !== trainer)
+                              .filter(
+                                (t): t is string => typeof t === "string",
+                              );
+                            setSelectedTrainers(newSelected);
+                            setForm({ ...form, trainers: newSelected });
+                          }
+                        }}
+                        required={selectedTrainers.length === 0}
+                      />
+                      {trainer}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="border-l border-teal-500 pl-4">
+              <div>
+                <Course
+                  course={form as Course}
+                  idx={1}
+                  getLevelLabel={getLevelLabel}
                 />
               </div>
             </div>
           </div>
-          {/* Level */}
-          <div className="flex items-baseline gap-2">
-            <label htmlFor="level" className="whitespace-nowrap">
-              Level <span className="text-orange-500">*</span>
-            </label>
-            <select
-              name="level"
-              id="level"
-              value={selectedLevel}
-              onChange={(e) => {
-                const value = Number(e.target.value);
-                setSelectedLevel(value);
-                setForm({ ...form, level: value });
-              }}
-              required
-              className="form-input"
-            >
-              <option value={1}>Beginner</option>
-              <option value={2}>Intermediate</option>
-              <option value={3}>Advanced</option>
-            </select>
-          </div>
-          {/* Audience */}
-          <div className="flex items-baseline gap-2">
-            <label htmlFor="minAge" className="whitespace-nowrap">
-              Minimum Age <span className="text-orange-500">*</span>
-            </label>
-            <div className="w-full">
-              <input
-                name="minAge"
-                id="minAge"
-                value={minAge}
-                onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setMinAge(value);
-                  setForm({ ...form, minAge: value });
-                }}
-                required
-                className="form-input"
-              />
-              {minAge && minAge > 1 && minAge < 18 ? (
-                <p className="px-2 text-xs text-green-800">
-                  This course will be shown as Course for Youngs from {minAge}{" "}
-                  years old.
-                </p>
-              ) : minAge && minAge >= 18 ? (
-                <p className="px-2 text-xs text-green-800">
-                  This course will be shown as Course for Adults.
-                </p>
-              ) : minAge === 0 ? ( // check explicitly for zero here
-                <p className="px-2 text-xs text-red-800">
-                  Please enter a minimum age.
-                </p>
-              ) : null}
-            </div>
-          </div>
-          {/* Trainers */}
-          <div className="flex flex-col gap-2 border-t border-teal-500 py-4">
-            <label className="whitespace-nowrap">
-              Trainer(s) <span className="text-orange-500">*</span>
-            </label>
-            <div className="grid grid-cols-4 gap-2">
-              {demoTrainers.map((trainer) => (
-                <label key={trainer} className="inline-flex items-center gap-1">
-                  <input
-                    className="checkbox"
-                    type="checkbox"
-                    name="trainers"
-                    value={trainer}
-                    checked={selectedTrainers.includes(trainer as string)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        const newSelected = [
-                          ...selectedTrainers,
-                          trainer,
-                        ].filter((t): t is string => typeof t === "string");
-                        setSelectedTrainers(newSelected);
-                        setForm({ ...form, trainers: newSelected });
-                      } else {
-                        const newSelected = selectedTrainers
-                          .filter((t) => t !== trainer)
-                          .filter((t): t is string => typeof t === "string");
-                        setSelectedTrainers(newSelected);
-                        setForm({ ...form, trainers: newSelected });
-                      }
-                    }}
-                    required={selectedTrainers.length === 0}
-                  />
-                  {trainer}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Submit Button */}
-
           <button
             type="submit"
             className="w-full rounded bg-teal-500 px-6 py-2 font-medium hover:cursor-pointer hover:ring-2 hover:ring-teal-600 hover:delay-300 hover:duration-200 hover:ring-inset active:bg-teal-600"

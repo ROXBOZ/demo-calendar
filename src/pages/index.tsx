@@ -5,7 +5,13 @@ import { Filters } from "@/Components/Calendar/Filters";
 import Form from "@/Components/Form";
 import rawData from "../data.json";
 
-const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+export const weekDays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+];
 
 const Home: React.FC = () => {
   //NOTE TypeScript won’t check if the JSON actually matches Course[]. It’s just a type assertion.

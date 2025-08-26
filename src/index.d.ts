@@ -13,7 +13,7 @@ type WeekDay = 1 | 2 | 3 | 4 | 5;
 
 interface Course {
   title: string;
-  weekDay: WeekDay;
+  weekDay?: WeekDay;
   level?: 1 | 2 | 3; // Narrow down the level range
   startTime?: TimeString;
   duration: 60 | 90 | 120;
@@ -21,6 +21,7 @@ interface Course {
   room: number;
   openToAll: boolean;
   trainers?: string[];
+  room: number;
 }
 
 interface FiltersProps {
@@ -37,6 +38,6 @@ interface FiltersProps {
   titles: string[];
   trainers: string[];
   resetFilters: (
-    filterType: "level" | "title" | "trainer" | "ageGroup" | "openToAll"
+    filterType: "level" | "title" | "trainer" | "ageGroup" | "openToAll",
   ) => void;
 }
