@@ -19,8 +19,11 @@ export const Filters: React.FC<FiltersProps> = ({
     <div className="flex-wr bg-chocolate-200 flex items-baseline justify-between gap-4 rounded p-4">
       <div className="flex flex-wrap gap-4">
         <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
-          <label className="font-semibold">Title</label>
+          <label className="font-semibold" htmlFor="titleFilter">
+            Title
+          </label>
           <select
+            id="titleFilter"
             className="hover:cursor-pointer"
             value={titleFilter}
             onChange={(e) => {
@@ -38,8 +41,11 @@ export const Filters: React.FC<FiltersProps> = ({
         </div>
 
         <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
-          <label className="font-semibold">Level</label>
+          <label className="font-semibold" htmlFor="levelFilter">
+            Level
+          </label>
           <select
+            id="levelFilter"
             className="hover:cursor-pointer"
             value={levelFilter}
             onChange={(e) => {
@@ -55,8 +61,11 @@ export const Filters: React.FC<FiltersProps> = ({
         </div>
 
         <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
-          <label className="font-semibold">Trainer</label>
+          <label className="font-semibold" htmlFor="trainerFilter">
+            Trainer
+          </label>
           <select
+            id="trainerFilter"
             className="hover:cursor-pointer"
             value={trainerFilter}
             onChange={(e) => {
@@ -74,8 +83,11 @@ export const Filters: React.FC<FiltersProps> = ({
         </div>
 
         <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
-          <label className="font-semibold">Age Group</label>
+          <label className="font-semibold" htmlFor="ageGroup">
+            Age Group
+          </label>
           <select
+            id="ageGroup"
             className="hover:cursor-pointer"
             value={ageGroup}
             onChange={(e) => {
@@ -90,17 +102,20 @@ export const Filters: React.FC<FiltersProps> = ({
         </div>
 
         <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
-          <input
-            type="checkbox"
-            id="openToAll"
-            checked={openToAllOnly}
-            onChange={() => {
-              setOpenToAllOnly((prev) => !prev);
-              resetFilters("openToAll");
-            }}
-            className="size-4 hover:cursor-pointer"
-          />
-          <label className="font-semibold" htmlFor="openToAll">
+          <label
+            className="flex items-center gap-2 font-semibold"
+            htmlFor="openToAll"
+          >
+            <input
+              type="checkbox"
+              id="openToAll"
+              checked={openToAllOnly}
+              onChange={() => {
+                setOpenToAllOnly((prev) => !prev);
+                resetFilters("openToAll");
+              }}
+              className="size-4 hover:cursor-pointer"
+            />
             Open to All
           </label>
         </div>

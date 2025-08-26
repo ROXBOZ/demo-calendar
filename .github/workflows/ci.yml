@@ -84,7 +84,7 @@ jobs:
 
       # Run accessibility tests with Pa11y
       - name: Run accessibility tests
-        run: npx pa11y-ci
+        run: npx pa11y-ci --chrome-launcher-flags="--no-sandbox"
         working-directory: next
 
       # Run TypeScript type checking
