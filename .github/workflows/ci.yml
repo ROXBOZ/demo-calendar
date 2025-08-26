@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Run accessibility tests with Pa11y
+      - name: Run accessibility tests
+        run: npx pa11y-ci
+        working-directory: next
+
       # Setup Node.js and cache npm dependencies
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -81,13 +86,6 @@ jobs:
       - name: Wait for Next.js
         run: npx wait-on http://localhost:3000
         working-directory: next
-
-      # Run accessibility tests with Pa11y
-      - name: Run accessibility tests
-        run: npx pa11y-ci
-        working-directory: next
-        env:
-          PUPPETEER_ARGS: --no-sandbox
 
       # Run TypeScript type checking
       - name: Type check
