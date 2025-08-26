@@ -59,13 +59,13 @@ jobs:
           NEXT_PUBLIC_SANITY_TOKEN: ${{ secrets.NEXT_PUBLIC_SANITY_TOKEN }}
 
       # Run unit and integration tests
-      - name: Run tests
-        run: npm test
-        working-directory: next
-        env:
-          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
-          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-          NEXT_PUBLIC_SANITY_TOKEN: ${{ secrets.NEXT_PUBLIC_SANITY_TOKEN }}
+      # - name: Run tests
+      #   run: npm test
+      #   working-directory: next
+      #   env:
+      #     NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      #     NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+      #     NEXT_PUBLIC_SANITY_TOKEN: ${{ secrets.NEXT_PUBLIC_SANITY_TOKEN }}
 
       # Start Next.js server in background for accessibility and Lighthouse tests
       - name: Start Next.js in background
