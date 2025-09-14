@@ -166,7 +166,7 @@ const Calendar: React.FC = () => {
             <h1 className="p-4 text-xl font-medium">
               {room === 1 ? "Workout Room" : "Boxing Room"}
             </h1>
-            <div className="bg-base-100 grid grid-cols-1 gap-4 rounded p-4 md:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 rounded bg-stone-100 p-4 md:grid-cols-5">
               {weekDays.map((day, index) => (
                 <div key={index} className="flex flex-col gap-2">
                   <h2 className="px-4 font-medium">{day}</h2>
@@ -191,7 +191,7 @@ const Calendar: React.FC = () => {
                         setAgeGroup("");
                         setOpenToAllOnly(false);
                       }}
-                      className="bg-base-50 text-base-700 flex h-full w-full items-center justify-center rounded font-medium hover:cursor-pointer"
+                      className="flex h-full w-full items-center justify-center rounded bg-stone-50 font-medium text-stone-700 hover:cursor-pointer"
                     >
                       NO COURSES
                     </button>
@@ -202,7 +202,7 @@ const Calendar: React.FC = () => {
                       setShowModal(true);
                       setSelectedDay(index + 1);
                     }}
-                    className="bg-base-200 hover:ring-base-300 active:bg-base-300 rounded-md py-1 font-semibold hover:cursor-pointer hover:ring-2 hover:delay-200 hover:duration-300 hover:ring-inset"
+                    className="rounded-md bg-stone-200 py-1 font-semibold hover:cursor-pointer hover:ring-2 hover:ring-stone-300 hover:delay-200 hover:duration-300 hover:ring-inset active:bg-stone-300"
                   >
                     + Add course
                   </button>

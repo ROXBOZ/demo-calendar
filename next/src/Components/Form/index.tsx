@@ -101,14 +101,14 @@ function Form({
       onClick={() => {
         setShowModal(false);
       }}
-      className="bg-base-950/60 fixed top-0 right-0 bottom-0 left-0 flex min-h-screen items-center justify-center p-4"
+      className="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-stone-950/60 p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-base-50 relative z-50 h-fit w-full max-w-[100ch] rounded p-12 shadow-md"
+        className="relative z-50 max-h-[100vh] w-full max-w-[100ch] overflow-hidden rounded bg-stone-50 p-6 shadow-md md:m-4"
       >
         <button
-          className="hover:bg-base-100 absolute top-4 right-4 flex items-center gap-1 rounded px-3 hover:cursor-pointer"
+          className="absolute top-0 right-0 flex items-center gap-1 rounded px-1 hover:cursor-pointer hover:bg-stone-100"
           onClick={() => {
             setShowModal(false);
           }}
@@ -116,13 +116,13 @@ function Form({
           <span>✖</span> <span className="sr-only text-sm">close</span>
         </button>
         <form onSubmit={handleSubmit} className="w-full space-y-4">
-          <div className="flex w-full gap-4">
-            <div className="flex-1">
+          <div className="flex w-full flex-col-reverse gap-4 md:flex-row">
+            <div className="max-h-[60vh] flex-1 overflow-y-auto md:max-h-none">
               <h2 className="text-lg font-medium">Add a new course</h2>
-              {/* title */}
-              <div className="flex items-baseline gap-2">
+
+              <div className="flex flex-col items-baseline md:flex-row md:gap-2">
                 <label htmlFor="title" className="whitespace-nowrap">
-                  Title of the Course <span className="text-orange-500">*</span>
+                  Title of the Course <span className="text-yellow-500">*</span>
                 </label>
                 <select
                   name="title"
@@ -143,11 +143,10 @@ function Form({
                   ))}
                 </select>
               </div>
-              <div className="my-4 flex flex-col gap-4 border-y border-teal-500 py-4">
-                {/* Day of the week */}
-                <div className="flex items-baseline gap-2">
+              <div className="my-4 flex flex-col gap-4 border-y border-amber-500 py-4">
+                <div className="flex flex-col items-baseline md:flex-row md:gap-2">
                   <label htmlFor="weekDay" className="whitespace-nowrap">
-                    Day of the week <span className="text-orange-500">*</span>
+                    Day of the week <span className="text-yellow-500">*</span>
                   </label>
                   <select
                     name="weekDay"
@@ -172,10 +171,9 @@ function Form({
                   </select>
                 </div>
 
-                {/* Time */}
                 <div className="flex items-baseline gap-2">
                   <label htmlFor="startTime" className="whitespace-nowrap">
-                    Starting Time <span className="text-orange-500">*</span>
+                    Starting Time <span className="text-yellow-500">*</span>
                   </label>
                   <div className="flex w-full space-x-2">
                     <select
@@ -223,10 +221,9 @@ function Form({
                   </div>
                 </div>
 
-                {/* Duration */}
                 <div className="flex items-baseline gap-2">
                   <label htmlFor="duration" className="whitespace-nowrap">
-                    Duration <span className="text-orange-500">*</span>
+                    Duration <span className="text-yellow-500">*</span>
                   </label>
                   <select
                     name="duration"
@@ -245,10 +242,10 @@ function Form({
                     <option value={120}>120 minutes</option>
                   </select>
                 </div>
-                {/* Room */}
+
                 <div className="flex items-baseline gap-2">
                   <label htmlFor="room" className="whitespace-nowrap">
-                    Room <span className="text-orange-500">*</span>
+                    Room <span className="text-yellow-500">*</span>
                   </label>
                   <select
                     name="room"
@@ -266,7 +263,7 @@ function Form({
                     <option value={2}>Boxing Room</option>
                   </select>
                 </div>
-                {/* openToAll */}
+
                 <div className="flex items-center gap-2">
                   <label htmlFor="openToAll" className="whitespace-nowrap">
                     This course is open to all
@@ -287,10 +284,10 @@ function Form({
                   </div>
                 </div>
               </div>
-              {/* Level */}
+
               <div className="mb-4 flex items-baseline gap-2">
                 <label htmlFor="level" className="whitespace-nowrap">
-                  Level <span className="text-orange-500">*</span>
+                  Level <span className="text-yellow-500">*</span>
                 </label>
                 <select
                   name="level"
@@ -309,10 +306,10 @@ function Form({
                   <option value={3}>Advanced</option>
                 </select>
               </div>
-              {/* Audience */}
+
               <div className="flex items-baseline gap-2">
                 <label htmlFor="minAge" className="whitespace-nowrap">
-                  Minimum Age <span className="text-orange-500">*</span>
+                  Minimum Age <span className="text-yellow-500">*</span>
                 </label>
                 <div className="w-full">
                   <input
@@ -328,27 +325,27 @@ function Form({
                     className="form-input"
                   />
                   {minAge && minAge > 1 && minAge < 18 ? (
-                    <p className="px-2 text-xs text-green-800">
+                    <p className="px-2 text-xs text-amber-800">
                       This course will be shown as Course for Youngs from{" "}
                       {minAge} years old.
                     </p>
                   ) : minAge && minAge >= 18 ? (
-                    <p className="px-2 text-xs text-green-800">
-                      This course will be shown as Course for Adults.
+                    <p className="px-2 text-xs text-amber-800">
+                      This course will be shown as for Adults.
                     </p>
-                  ) : minAge === 0 ? ( // check explicitly for zero here
+                  ) : minAge === 0 ? (
                     <p className="px-2 text-xs text-red-800">
                       Please enter a minimum age.
                     </p>
                   ) : null}
                 </div>
               </div>
-              {/* Trainers */}
-              <div className="my-4 flex flex-col gap-2 border-t border-teal-500 py-4">
+
+              <div className="my-4 flex flex-col gap-2 border-t border-amber-500 py-4">
                 <label className="whitespace-nowrap">
-                  Trainer(s) <span className="text-orange-500">*</span>
+                  Trainer(s) <span className="text-yellow-500">*</span>
                 </label>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-3 gap-2 md:grid-cols-4">
                   {demoTrainers.map((trainer) => (
                     <label
                       key={trainer}
@@ -386,22 +383,21 @@ function Form({
                 </div>
               </div>
             </div>
-            <div className="border-l border-teal-500 pl-4">
-              <div>
-                <Course
-                  course={form as Course}
-                  idx={1}
-                  getLevelLabel={getLevelLabel}
-                />
-              </div>
+
+            <div className="flex-shrink-0 border-amber-500 md:border-l md:pl-4">
+              <Course
+                course={form as Course}
+                idx={1}
+                getLevelLabel={getLevelLabel}
+              />
             </div>
           </div>
-          <button
+          {/* <button
             type="submit"
-            className="w-full rounded bg-teal-500 px-6 py-2 font-medium hover:cursor-pointer hover:ring-2 hover:ring-teal-600 hover:delay-300 hover:duration-200 hover:ring-inset active:bg-teal-600"
+            className="w-full rounded bg-amber-500 px-6 py-2 font-medium hover:cursor-pointer hover:ring-2 hover:ring-amber-600 hover:delay-300 hover:duration-200 hover:ring-inset active:bg-amber-600"
           >
             Send
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

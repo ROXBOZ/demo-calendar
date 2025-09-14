@@ -13,13 +13,13 @@ function Course({
   return (
     <div
       key={idx}
-      className={`bg-base-50 min-h-36 overflow-hidden border-2 ${
-        course.minAge < 18 ? "border-teal-500" : "border-orange-500"
+      className={`min-h-36 overflow-hidden border-2 bg-stone-50 ${
+        course.minAge < 18 ? "border-amber-500" : "border-yellow-500"
       } rounded-lg pb-4`}
     >
       <div
-        className={`flex ${
-          course.minAge < 18 ? "bg-teal-500" : "bg-orange-500"
+        className={`flex flex-col lg:flex-row ${
+          course.minAge < 18 ? "bg-amber-500" : "bg-yellow-500"
         } w-full items-baseline justify-between gap-2 px-4 pt-2 pb-2 leading-tight font-medium`}
       >
         <h3>

@@ -16,9 +16,9 @@ export const Filters: React.FC<FiltersProps> = ({
   resetFilters,
 }) => {
   return (
-    <div className="flex-wr bg-chocolate-200 flex items-baseline justify-between gap-4 rounded p-4">
+    <div className="bg-chocolate-200 flex items-baseline justify-between gap-4 rounded">
       <div className="flex flex-wrap gap-4">
-        <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
+        <div className="flex items-baseline gap-3 rounded bg-stone-100 px-3 py-1">
           <label className="font-semibold" htmlFor="titleFilter">
             Title
           </label>
@@ -40,7 +40,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
+        <div className="flex items-baseline gap-3 rounded bg-stone-100 px-3 py-1">
           <label className="font-semibold" htmlFor="levelFilter">
             Level
           </label>
@@ -60,7 +60,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
+        <div className="flex items-baseline gap-3 rounded bg-stone-100 px-3 py-1">
           <label className="font-semibold" htmlFor="trainerFilter">
             Trainer
           </label>
@@ -82,7 +82,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
+        <div className="flex items-baseline gap-3 rounded bg-stone-100 px-3 py-1">
           <label className="font-semibold" htmlFor="ageGroup">
             Age Group
           </label>
@@ -101,7 +101,7 @@ export const Filters: React.FC<FiltersProps> = ({
           </select>
         </div>
 
-        <div className="bg-base-100 flex items-baseline gap-3 rounded p-4">
+        <div className="flex items-baseline gap-3 rounded bg-stone-100 px-3 py-1">
           <label
             className="flex items-center gap-2 font-semibold"
             htmlFor="openToAll"
@@ -122,7 +122,7 @@ export const Filters: React.FC<FiltersProps> = ({
       </div>
 
       <button
-        className="bg-base-300 hover:ring-base-400 active:bg-base-400 rounded p-4 font-semibold whitespace-nowrap ring-inset hover:cursor-pointer hover:ring-2 hover:delay-200 hover:duration-200"
+        className="rounded bg-stone-300 px-3 py-1 font-semibold whitespace-nowrap ring-inset hover:cursor-pointer hover:ring-2 hover:ring-stone-400 hover:delay-200 hover:duration-200 active:bg-stone-400"
         onClick={() => {
           setLevelFilter("");
           setTitleFilter("");

@@ -8,7 +8,7 @@ export default function Document() {
 
         <meta name="description" content="The meta description here." />
       </Head>
-      <body className="bg-base-200 antialiased">
+      <body className="bg-stone-200 antialiased">
         <Main />
         <NextScript />
       </body>
